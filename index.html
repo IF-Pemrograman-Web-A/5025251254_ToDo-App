@@ -14,14 +14,14 @@
 
             <!-- User Profile -->
             <div class="user-profile">
-                <div class="avatar"></div>
-                <span class="user-name">User 1</span>
+                <img src="user-avatar.png" alt="User Avatar" class="avatar">
+                <span class="user-name">Salsabila Shafadelarosa</span>
             </div>
         </div>
     </header>
 
     <main class="container">
-        <!-- Left Panel: Todo List -->
+        <!-- Left Panel: Todo List (main content) -->
         <section class="left-panel">
             <div class="panel-header">
                 <h2>My Tasks</h2>
@@ -82,15 +82,24 @@
                 </div>
             </div>
 
-            <!-- Add New Task Button -->
-            <button class="add-task">
-                <span class="plus">+</span>
-                <span>Add New Task</span>
-            </button>
+            <!-- Separate form: Add New Task -->
+            <form class="new-task-form">
+                <input type="text" name="new-task-title" placeholder="Task name" required>
+                <input type="date" name="new-task-due" required>
+                <select name="new-task-urgency">
+                    <option value="urgent">Urgent</option>
+                    <option value="important">Important</option>
+                    <option value="normal" selected>Normal</option>
+                </select>
+                <button type="submit" class="add-task">
+                    <span class="plus">+</span>
+                    <span>Add New Task</span>
+                </button>
+            </form>
         </section>
 
-        <!-- Right Panel: Task Details -->
-        <section class="right-panel">
+        <!-- Right Panel: Task Details (secondary/complementary content) -->
+        <aside class="right-panel">
             <div class="empty-state">
                 <h2>Task Details</h2>
                 <p>Select a task to view its details.</p>
@@ -125,7 +134,11 @@
                     </div>
                 </form>
             </div>
-        </section>
+        </aside>
     </main>
+
+    <footer>
+        <p>&copy; 2026 DO . IT! - 5025251254</p>
+    </footer>
 </body>
 </html>

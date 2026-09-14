@@ -192,6 +192,15 @@ header {
 
 /* Add task button */
 
+.new-task-form input,
+.new-task-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font: inherit;
+}
+
 .add-task {
     width: 100%;
     margin-top: 10px;
