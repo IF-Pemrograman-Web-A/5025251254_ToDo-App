@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="main-header">
+            <h1>DO . IT!</h1>
+
+            <!-- User Profile -->
+            <div class="user-profile">
+                <img src="user-avatar.png" alt="User Avatar" class="avatar">
+                <span class="user-name">Salsabila Shafadelarosa</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Left Panel: Todo List -->
+        <section class="left-panel">
+            <div class="panel-header">
+                <h2>My Tasks</h2>
+                <span class="badge-count">4</span>
+            </div>
+
+            <!-- Todo 1 -->
+            <a href="#detail-1" class="task-item">
+                <div class="todo-list">
+                    <div class="list-task">
+                        <input type="checkbox">
+                        <span class="task-title">Tugas 1 Pemrograman Web</span>
+                        <span class="arrow">&rsaquo;</span>
+                    </div>
+                    <div class="todo-meta">
+                        <span class="meta-due">📅 14-09-2026</span>
+                        <span class="meta-urgency urgent">⚡ Urgent</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Todo 2 -->
+            <div class="todo-list">
+                <div class="list-task">
+                    <input type="checkbox">
+                    <span class="task-title">Tugas Rangkuman 1 KPPL</span>
+                    <span class="arrow">&rsaquo;</span>
+                </div>
+                <div class="todo-meta">
+                    <span class="meta-due">📅 15-09-2026</span>
+                    <span class="meta-urgency urgent">⚡ Urgent</span>
+                </div>
+            </div>
+
+            <!-- Todo 3 -->
+            <div class="todo-list">
+                <div class="list-task">
+                    <input type="checkbox">
+                    <span class="task-title">Pra-praktikum Jaringan Komputer</span>
+                    <span class="arrow">&rsaquo;</span>
+                </div>
+                <div class="todo-meta">
+                    <span class="meta-due">📅 24-09-2026</span>
+                    <span class="meta-urgency important">⚡ Important</span>
+                </div>
+            </div>
+
+            <!-- Todo 4 -->
+            <div class="todo-list">
+                <div class="list-task">
+                    <input type="checkbox">
+                    <span class="task-title">Ambil Laundry</span>
+                    <span class="arrow">&rsaquo;</span>
+                </div>
+                <div class="todo-meta">
+                    <span class="meta-due">📅 30-09-2026</span>
+                    <span class="meta-urgency normal">⚡ Normal</span>
+                </div>
+            </div>
+
+            <!-- Add New Task Button -->
+            <button class="add-task">
+                <span class="plus">+</span>
+                <span>Add New Task</span>
+            </button>
+        </section>
+
+        <!-- Right Panel: Task Details -->
+        <section class="right-panel">
+            <div class="empty-state">
+                <h2>Task Details</h2>
+                <p>Select a task to view its details.</p>
+            </div>
+
+            <!-- Detail Task 1 -->
+            <div id="detail-1" class="editor-content">
+                <div class="editor-header">
+                    <h2>Task Details</h2>
+                    <a href="#" class="btn-close">&times;</a>
+                </div>
+
+                <form class="editor-body">
+                    <h3>Tugas 1 Pemrograman Web</h3>
+                    <p>Description: This is the description for Task 1.</p>
+
+                    <div class="editor-meta">
+                        <label for="due-date">Due Date:</label>
+                        <input type="date" id="due-date" name="due-date" value="2026-09-14">
+
+                        <label for="urgency">Urgency:</label>
+                        <select id="urgency" name="urgency">
+                            <option value="urgent" selected>Urgent</option>
+                            <option value="important">Important</option>
+                            <option value="normal">Normal</option>
+                        </select>
+                    </div>
+
+                    <div class="editor-actions">
+                        <button type="button" class="btn-delete">Delete Task</button>
+                        <button type="submit" class="btn-save">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
