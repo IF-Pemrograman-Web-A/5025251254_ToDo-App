@@ -1,0 +1,360 @@
+:root {
+    --pink: #ff5ca8;
+    --lime: #d4f24a;
+    --purple: #8b7fe8;
+    --black: #111111;
+    --cream: #fdf9e8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--cream);
+    color: var(--black);
+}
+
+/* Header */
+
+header {
+    width: 100%;
+    background-color: var(--lime);
+    border-bottom: 3px solid var(--black);
+}
+
+.main-header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main-header h1 {
+    color: var(--black);
+    font-size: 30px;
+    letter-spacing: 1px;
+    font-weight: 900;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2317231d'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M12 14c-5 0-8 2.5-8 5v1h16v-1c0-2.5-3-5-8-5z'/%3E%3C/svg%3E");
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    color: transparent;
+    font-size: 0;
+}
+
+.user-name {
+    color: var(--black);
+    font-weight: 700;
+}
+
+/* Main container */
+
+.container {
+    max-width: 1200px;
+    min-height: calc(100vh - 81px);
+    margin: 0 auto;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+/* Panels */
+
+.left-panel, .right-panel {
+    background-color: #ffffff;
+    border: 3px solid var(--black);
+    border-radius: 14px;
+    padding: 25px;
+    box-shadow: 6px 6px 0 var(--black);
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.panel-header h2 {
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.badge-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    background-color: var(--pink);
+    color: var(--black);
+    border: 2px solid var(--black);
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 900;
+}
+
+/* Todo item */
+
+.task-item {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.todo-list {
+    padding: 15px;
+    margin-bottom: 12px;
+    background-color: #ffffff;
+    border: 2px solid var(--black);
+    border-radius: 10px;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.todo-list:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--black);
+}
+
+.list-task {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.list-task input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--purple);
+}
+
+.task-title {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.arrow {
+    font-size: 24px;
+}
+
+/* Todo meta */
+
+.todo-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding-left: 28px;
+    font-size: 12px;
+}
+
+.meta-due {
+    color: #555;
+    font-weight: 700;
+}
+
+.meta-urgency {
+    font-weight: 900;
+}
+
+.urgent {
+    color: #d62828;
+}
+
+.important {
+    color: #d98200;
+}
+
+.normal {
+    color: #2e9e1f;
+}
+
+/* Add task button */
+
+.add-task {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    border: 2px dashed var(--black);
+    border-radius: 10px;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.add-task:hover {
+    background-color: var(--lime);
+}
+
+.plus {
+    font-size: 20px;
+}
+
+/* Right panel */
+
+.right-panel {
+    position: relative;
+    background-color: var(--purple);
+}
+
+.empty-state {
+    display: none;
+}
+
+.empty-state h2 {
+    margin-bottom: 8px;
+    color: #fff;
+    font-weight: 900;
+}
+
+/* Editor */
+
+.editor-content {
+    display: block;
+}
+
+.editor-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.editor-header h2 {
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.btn-close {
+    font-size: 25px;
+    text-decoration: none;
+    color: var(--black);
+}
+
+.editor-body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.editor-body h3 {
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.editor-body p {
+    color: #444;
+    line-height: 1.5;
+}
+
+.editor-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.editor-meta input,
+.editor-meta select {
+    padding: 10px;
+    border: 2px solid var(--black);
+    border-radius: 7px;
+    font-size: 14px;
+    background-color: #fff;
+}
+
+.editor-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn-delete,
+.btn-save {
+    padding: 10px 16px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: 900;
+    border: 2px solid var(--black);
+    box-shadow: 3px 3px 0 var(--black);
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.btn-delete:hover,
+.btn-save:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--black);
+}
+
+.btn-delete {
+    background-color: #ffffff;
+    color: #d62828;
+}
+
+.btn-save {
+    background-color: var(--lime);
+    color: var(--black);
+}
+
+
+footer {
+    padding: 20px;
+    text-align: center;
+    color: var(--black);
+    font-size: 13px;
+    background-color: var(--lime);
+    border-top: 3px solid var(--black);
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+
+    .main-header {
+        padding: 15px 20px;
+    }
+
+    .main-header h1 {
+        font-size: 22px;
+    }
+
+    .user-name {
+        display: none;
+    }
+
+    .container {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+    .left-panel,
+    .right-panel {
+        padding: 20px;
+    }
+}
