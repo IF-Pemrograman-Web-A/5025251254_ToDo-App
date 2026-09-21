@@ -13,9 +13,18 @@
 }
 
 body {
-    font-family: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    font-weight: 400;
     background-color: var(--cream);
     color: var(--black);
+}
+
+.main-header h1,
+.panel-header h2,
+.editor-header h2,
+.empty-state h2 {
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    font-weight: 800;
 }
 
 /* Header */
@@ -32,39 +41,13 @@ header {
     padding: 14px 30px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .main-header h1 {
     color: var(--black);
-    font-size: 30px;
+    font-size: 40px;
     letter-spacing: 1px;
-    font-weight: 900;
-}
-
-.user-profile {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background-color: var(--accent);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2317231d'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M12 14c-5 0-8 2.5-8 5v1h16v-1c0-2.5-3-5-8-5z'/%3E%3C/svg%3E");
-    background-size: 60%;
-    background-position: center;
-    background-repeat: no-repeat;
-    object-fit: cover;
-    color: transparent;
-    font-size: 0;
-}
-
-.user-name {
-    color: var(--black);
-    font-weight: 700;
 }
 
 /* Main container */
@@ -98,7 +81,6 @@ header {
 
 .panel-header h2 {
     font-size: 22px;
-    font-weight: 900;
 }
 
 .badge-count {
@@ -112,7 +94,7 @@ header {
     border: 2px solid var(--black);
     border-radius: 50%;
     font-size: 12px;
-    font-weight: 900;
+    font-weight: 600;
 }
 
 /* Todo item */
@@ -121,6 +103,7 @@ header {
     display: block;
     text-decoration: none;
     color: inherit;
+    cursor: pointer;
 }
 
 .todo-list {
@@ -129,12 +112,23 @@ header {
     background-color: #ffffff;
     border: 2px solid var(--black);
     border-radius: 10px;
+    cursor: pointer;
     transition: transform 0.15s, box-shadow 0.15s;
 }
 
 .todo-list:hover {
     transform: translate(-2px, -2px);
     box-shadow: 4px 4px 0 var(--black);
+}
+
+.todo-list.active {
+    background-color: #fff2fa;
+    box-shadow: 4px 4px 0 var(--pink);
+}
+
+.todo-list.done .task-title {
+    text-decoration: line-through;
+    color: #999;
 }
 
 .list-task {
@@ -152,7 +146,7 @@ header {
 .task-title {
     flex: 1;
     font-size: 15px;
-    font-weight: 700;
+    font-weight: 400;
 }
 
 .arrow {
@@ -171,11 +165,11 @@ header {
 
 .meta-due {
     color: #555;
-    font-weight: 700;
+    font-weight: 400;
 }
 
 .meta-urgency {
-    font-weight: 900;
+    font-weight: 500;
 }
 
 .urgent {
@@ -190,16 +184,16 @@ header {
     color: #2e9e1f;
 }
 
-/* Add task button */
+/* Empty list message */
 
-.new-task-form input,
-.new-task-form select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    font: inherit;
+.empty-list {
+    padding: 20px;
+    text-align: center;
+    color: #888;
+    font-weight: 400;
 }
+
+/* Add task button */
 
 .add-task {
     width: 100%;
@@ -214,7 +208,8 @@ header {
     justify-content: center;
     gap: 8px;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 500;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
 }
 
 .add-task:hover {
@@ -232,21 +227,17 @@ header {
     background-color: var(--purple);
 }
 
-.empty-state {
-    display: none;
-}
-
 .empty-state h2 {
     margin-bottom: 8px;
     color: #fff;
-    font-weight: 900;
+}
+
+.empty-state p {
+    color: #f1f1f1;
+    font-weight: 400;
 }
 
 /* Editor */
-
-.editor-content {
-    display: block;
-}
 
 .editor-header {
     display: flex;
@@ -257,7 +248,6 @@ header {
 
 .editor-header h2 {
     font-size: 22px;
-    font-weight: 900;
 }
 
 .btn-close {
@@ -272,14 +262,31 @@ header {
     gap: 15px;
 }
 
-.editor-body h3 {
-    font-size: 20px;
-    font-weight: 900;
+.editor-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
-.editor-body p {
-    color: #444;
-    line-height: 1.5;
+.editor-field label,
+.editor-meta label {
+    font-size: 12px;
+    font-weight: 1000;
+    color: #2a2a2a;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.editor-field input,
+.editor-field textarea {
+    padding: 10px;
+    border: 2px solid var(--black);
+    border-radius: 7px;
+    font-size: 14px;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    background-color: #fff;
+    resize: vertical;
 }
 
 .editor-meta {
@@ -294,9 +301,20 @@ header {
     border: 2px solid var(--black);
     border-radius: 7px;
     font-size: 14px;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    font-weight: 400;
     background-color: #fff;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
+.editor-meta select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111111' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 16px;
+    padding-right: 40px;
+}
 .editor-actions {
     display: flex;
     justify-content: flex-end;
@@ -309,7 +327,8 @@ header {
     padding: 10px 16px;
     border-radius: 7px;
     cursor: pointer;
-    font-weight: 900;
+    font-weight: 600;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
     border: 2px solid var(--black);
     box-shadow: 3px 3px 0 var(--black);
     transition: transform 0.1s, box-shadow 0.1s;
@@ -337,6 +356,7 @@ footer {
     text-align: center;
     color: var(--black);
     font-size: 13px;
+    font-weight: 400;
     background-color: var(--lime);
     border-top: 3px solid var(--black);
 }

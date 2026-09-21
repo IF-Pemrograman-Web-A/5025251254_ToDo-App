@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo App</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -11,12 +16,6 @@
     <header>
         <div class="main-header">
             <h1>DO . IT!</h1>
-
-            <!-- User Profile -->
-            <div class="user-profile">
-                <div class="avatar"></div>
-                <span class="user-name">User 1</span>
-            </div>
         </div>
     </header>
 
@@ -25,112 +24,60 @@
         <section class="left-panel">
             <div class="panel-header">
                 <h2>My Tasks</h2>
-                <span class="badge-count">4</span>
+                <span class="badge-count" id="task-count">0</span>
             </div>
 
-            <!-- Todo 1 -->
-            <a href="#detail-1" class="task-item">
-                <div class="todo-list">
-                    <div class="list-task">
-                        <input type="checkbox">
-                        <span class="task-title">Tugas 1 Pemrograman Web</span>
-                        <span class="arrow">&rsaquo;</span>
-                    </div>
-                    <div class="todo-meta">
-                        <span class="meta-due">📅 14-09-2026</span>
-                        <span class="meta-urgency urgent">⚡ Urgent</span>
-                    </div>
-                </div>
-            </a>
+            <!-- Todo items are rendered here by app.js -->
+            <div id="todo-container"></div>
 
-            <!-- Todo 2 -->
-            <div class="todo-list">
-                <div class="list-task">
-                    <input type="checkbox">
-                    <span class="task-title">Tugas Rangkuman 1 KPPL</span>
-                    <span class="arrow">&rsaquo;</span>
-                </div>
-                <div class="todo-meta">
-                    <span class="meta-due">📅 15-09-2026</span>
-                    <span class="meta-urgency urgent">⚡ Urgent</span>
-                </div>
-            </div>
-
-            <!-- Todo 3 -->
-            <div class="todo-list">
-                <div class="list-task">
-                    <input type="checkbox">
-                    <span class="task-title">Pra-praktikum Jaringan Komputer</span>
-                    <span class="arrow">&rsaquo;</span>
-                </div>
-                <div class="todo-meta">
-                    <span class="meta-due">📅 24-09-2026</span>
-                    <span class="meta-urgency important">⚡ Important</span>
-                </div>
-            </div>
-
-            <!-- Todo 4 -->
-            <div class="todo-list">
-                <div class="list-task">
-                    <input type="checkbox">
-                    <span class="task-title">Ambil Laundry</span>
-                    <span class="arrow">&rsaquo;</span>
-                </div>
-                <div class="todo-meta">
-                    <span class="meta-due">📅 30-09-2026</span>
-                    <span class="meta-urgency normal">⚡ Normal</span>
-                </div>
-            </div>
-
-            <!-- Separate form: Add New Task -->
-            <form class="new-task-form">
-                <input type="text" name="new-task-title" placeholder="Task name" required>
-                <input type="date" name="new-task-due" required>
-                <select name="new-task-urgency">
-                    <option value="urgent">Urgent</option>
-                    <option value="important">Important</option>
-                    <option value="normal" selected>Normal</option>
-                </select>
-                <button type="submit" class="add-task">
-                    <span class="plus">+</span>
-                    <span>Add New Task</span>
-                </button>
-            </form>
+            <!-- Opens the editor panel on the right in "new task" mode -->
+            <button type="button" class="add-task" id="btn-add-task">
+                <span class="plus">+</span>
+                <span>Add New Task</span>
+            </button>
         </section>
 
         <!-- Right Panel: Task Details (secondary/complementary content) -->
         <aside class="right-panel">
-            <div class="empty-state">
+            <!-- Empty state, shown when no task is selected -->
+            <div class="empty-state" id="empty-state">
                 <h2>Task Details</h2>
-                <p>Select a task to view its details.</p>
+                <p>Select a task, or hit "Add New Task", to see it here.</p>
             </div>
 
-            <!-- Detail Task 1 -->
-            <div id="detail-1" class="editor-content">
+            <!-- Detail / add-task editor, filled in dynamically by app.js -->
+            <div id="editor-content" class="editor-content" style="display:none;">
                 <div class="editor-header">
-                    <h2>Task Details</h2>
-                    <a href="#" class="btn-close">&times;</a>
+                    <h2 id="editor-header-title">Task Details</h2>
+                    <a href="#" class="btn-close" id="btn-close">&times;</a>
                 </div>
 
-                <form class="editor-body">
-                    <h3>Tugas 1 Pemrograman Web</h3>
-                    <p>Description: This is the description for Task 1.</p>
+                <form class="editor-body" id="editor-form">
+                    <div class="editor-field">
+                        <label for="editor-name">Task Name</label>
+                        <input type="text" id="editor-name" name="editor-name" placeholder="e.g. Tugas Pemrograman Web" required>
+                    </div>
+
+                    <div class="editor-field">
+                        <label for="editor-description">Description</label>
+                        <textarea id="editor-description" name="editor-description" rows="3" placeholder="Add a description..."></textarea>
+                    </div>
 
                     <div class="editor-meta">
-                        <label for="due-date">Due Date:</label>
-                        <input type="date" id="due-date" name="due-date" value="2026-09-14">
+                        <label for="due-date">Due Date</label>
+                        <input type="date" id="due-date" name="due-date" required>
 
-                        <label for="urgency">Urgency:</label>
+                        <label for="urgency">Urgency</label>
                         <select id="urgency" name="urgency">
-                            <option value="urgent" selected>Urgent</option>
+                            <option value="urgent">Urgent</option>
                             <option value="important">Important</option>
                             <option value="normal">Normal</option>
                         </select>
                     </div>
 
                     <div class="editor-actions">
-                        <button type="button" class="btn-delete">Delete Task</button>
-                        <button type="submit" class="btn-save">Save Changes</button>
+                        <button type="button" class="btn-delete" id="btn-delete">Delete Task</button>
+                        <button type="submit" class="btn-save" id="btn-save">Save Changes</button>
                     </div>
                 </form>
             </div>
@@ -140,5 +87,7 @@
     <footer>
         <p>&copy; 2026 DO . IT! - 5025251254</p>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
