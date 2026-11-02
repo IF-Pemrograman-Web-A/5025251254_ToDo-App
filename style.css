@@ -910,3 +910,26 @@ a.add-task,
         flex: 1;
     }
 }
+
+/* Tombol install (E05) */
+.btn-install {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    min-height: 36px;
+    padding: 4px 12px;
+    background-color: var(--pink);
+    color: var(--black);
+    border: 2px solid var(--black);
+    border-radius: 8px;
+    box-shadow: 3px 3px 0 var(--black);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-install:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--black);
+}
