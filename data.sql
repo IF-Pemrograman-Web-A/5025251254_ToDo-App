@@ -1,65 +1,39 @@
+-- data.sql — struktur database + data dummy untuk Todo App (E04)
+CREATE DATABASE IF NOT EXISTS todo_app CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE todo_app;
 
-CREATE DATABASE IF NOT EXISTS do_it_db
-    CHARACTER SET utf8mb4
-    COLLATE utf8mb4_unicode_ci;
-
-USE do_it_db;
-
-SET FOREIGN_KEY_CHECKS = 0;
-DROP TABLE IF EXISTS todos;
+DROP TABLE IF EXISTS tasks;
 DROP TABLE IF EXISTS users;
-SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE users (
-    id         INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    name       VARCHAR(60)  NOT NULL,
-    email      VARCHAR(100) NOT NULL,
-    created_at TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
-    UNIQUE KEY uq_users_email (email)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    id   INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+) ENGINE=InnoDB;
 
-CREATE TABLE todos (
-    id          INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    owner_id    INT UNSIGNED NOT NULL,
+CREATE TABLE tasks (
+    id          INT AUTO_INCREMENT PRIMARY KEY,
+    user_id     INT NOT NULL,
     title       VARCHAR(150) NOT NULL,
-    description TEXT         NULL,
-    due_date    DATE         NOT NULL,
+    description TEXT,
+    due         DATE NOT NULL,
     urgency     ENUM('urgent','important','normal') NOT NULL DEFAULT 'normal',
-    visibility  ENUM('personal','shared')           NOT NULL DEFAULT 'personal',
-    is_done     TINYINT(1)   NOT NULL DEFAULT 0,
-    created_at  TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at  TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
-    KEY idx_todos_owner_visibility (owner_id, visibility),
-    KEY idx_todos_visibility_due   (visibility, due_date),
-    CONSTRAINT fk_todos_owner FOREIGN KEY (owner_id)
-        REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    visibility  ENUM('personal','shared') NOT NULL DEFAULT 'personal',
+    done        TINYINT(1) NOT NULL DEFAULT 0,
+    image       VARCHAR(255) NULL,
+    notify_at   DATETIME NULL,
+    notified    TINYINT(1) NOT NULL DEFAULT 0,
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_tasks_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
 
-INSERT INTO users (id, name, email) VALUES
-    (1, 'Alya',  'alya@example.com'),
-    (2, 'Budi',  'budi@example.com'),
-    (3, 'Citra', 'citra@example.com'),
-    (4, 'Dimas', 'dimas@example.com');
+INSERT INTO users (name) VALUES ('Shafa'), ('Budi'), ('Citra');
 
-INSERT INTO todos (owner_id, title, description, due_date, urgency, visibility, is_done) VALUES
-    -- Personal: Alya
-    (1, 'Kerjakan tugas Pemrograman Web',   'Selesaikan fitur CRUD dengan PHP dan MySQL.',          '2026-10-26', 'urgent',    'personal', 0),
-    (1, 'Baca materi Basis Data',           'Bab normalisasi dan relasi antar tabel.',              '2026-10-30', 'important', 'personal', 0),
-    (1, 'Beli buku catatan',                NULL,                                                   '2026-10-22', 'normal',    'personal', 1),
-    -- Personal: Budi
-    (2, 'Latihan soal Algoritma',           'Kerjakan 10 soal rekursi.',                            '2026-10-24', 'important', 'personal', 0),
-    (2, 'Servis laptop',                    'Ganti thermal paste dan bersihkan kipas.',             '2026-11-02', 'normal',    'personal', 0),
-    -- Personal: Citra
-    (3, 'Revisi laporan praktikum',         'Perbaiki bagian analisis dan kesimpulan.',             '2026-10-23', 'urgent',    'personal', 0),
-    (3, 'Daftar kegiatan volunteer',        'Isi formulir pendaftaran sebelum kuota penuh.',        '2026-10-28', 'normal',    'personal', 1),
-    -- Personal: Dimas
-    (4, 'Belajar Git dan GitHub',           'Coba branching, merge, dan pull request.',             '2026-10-29', 'important', 'personal', 0),
-
-    -- Shared: terlihat oleh semua anggota
-    (1, 'Rapat evaluasi mingguan',          'Bahas progres tugas kelompok. Siapkan laporan singkat.', '2026-10-24', 'urgent',    'shared', 0),
-    (2, 'Siapkan slide presentasi kelompok','Gabungkan materi semua anggota ke satu template.',      '2026-10-27', 'important', 'shared', 0),
-    (3, 'Booking ruang diskusi',            'Pesan ruang untuk sesi belajar bersama hari Jumat.',    '2026-10-23', 'normal',    'shared', 1),
-    (4, 'Rapikan repository kelompok',      'Hapus file tidak terpakai dan perbarui README.',        '2026-10-31', 'normal',    'shared', 0),
-    (1, 'Kumpulkan dokumentasi kegiatan',   'Kumpulkan foto dan catatan dari semua anggota.',        '2026-11-05', 'important', 'shared', 0);
+INSERT INTO tasks (user_id, title, description, due, urgency, visibility, done) VALUES
+(1, 'Kerjakan tugas Pemrograman Web E04', 'Migrasi ke PHP + database.',            '2026-11-09', 'urgent',    'personal', 0),
+(1, 'Belajar untuk kuis Basis Data',      'Bab normalisasi dan ERD.',               '2026-11-12', 'important', 'personal', 0),
+(1, 'Beli buku catatan',                  NULL,                                     '2026-11-05', 'normal',    'personal', 1),
+(2, 'Revisi laporan praktikum',           'Tambahkan analisis hasil.',              '2026-11-10', 'important', 'personal', 0),
+(2, 'Siapkan slide presentasi kelompok',  'Kerjakan bersama tim.',                  '2026-11-11', 'urgent',    'shared',   0),
+(3, 'Rapat kelompok proyek akhir',        'Bahas pembagian tugas, Sabtu pukul 10.', '2026-11-07', 'important', 'shared',   0),
+(3, 'Rekap nilai kuis kelas',             'Input ke spreadsheet bersama.',          '2026-11-14', 'normal',    'shared',   1),
+(1, 'Review kode anggota tim',            'Cek pull request di GitHub.',            '2026-11-08', 'normal',    'shared',   0);
